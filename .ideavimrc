@@ -1,0 +1,72 @@
+"line number map ctrl n twice to toggle numbers
+nmap <C-N><C-N> :set invnumber<CR>
+" Move visual block
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+" Return to visual block when indenting
+vnoremap < <gv
+vnoremap > >gv
+set backspace=2
+set diffopt=horizontal
+set nohlsearch
+set nocompatible
+set tabstop=8
+set softtabstop=4
+set expandtab
+set shiftwidth=4
+set wrapmargin=0
+set wrap
+set ignorecase
+set autoindent
+syntax on
+set nu
+set background=dark
+colorscheme molokai
+
+imap jk <Esc>
+nmap ; :
+nmap <F8> :TagbarToggle<CR>
+nmap <C-S><C-C> :set spell spelllang=en_ca<CR>
+nmap <C-C><C-S> :set nospell<CR>
+
+" Allows us to use bash movement in VIM command line
+
+" start of line
+cnoremap <C-A>          <Home>
+" back one character
+cnoremap <C-B>          <Left>
+" delete character under cursor
+cnoremap <C-D>          <Del>
+" end of line
+cnoremap <C-E>          <End>
+" forward one character
+cnoremap <C-F>          <Right>
+" recall newer command-line
+cnoremap <C-N>          <Down>
+" recall previous (older) command-line
+cnoremap <C-P>          <Up>
+" back one word
+cnoremap <Esc><C-B>     <S-Left>
+" forward one word
+cnoremap <Esc><C-F>     <S-Right>
+
+" Insert mode
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
+
+" ============================================================================
+" IDE actions
+" ============================================================================
+
+nnoremap / :action Find<CR>
+nnoremap n :action FindNext<CR>
+nnoremap N :action FindPrevious<CR>
+nnoremap U :action $Redo<CR>
+nnoremap <Space>o :action GotoClass<CR>
+nnoremap <Space>O :action GotoFile<CR>
+nnoremap <Space>d :action CloseContent<CR>
+nnoremap <Space>j :action RecentFiles<CR>
+nnoremap <Space>k :action FileStructurePopup<CR>
+nnoremap <Space>h :action QuickJavaDoc<CR>
