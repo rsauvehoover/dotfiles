@@ -1,17 +1,18 @@
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.local/share/nvim/site/autoload')
 
-"Plug 'jiangmiao/auto-pairs'
+Plug 'leafgarland/typescript-vim'
+Plug 'thaerkh/vim-workspace'
+Plug 'plasticboy/vim-markdown'
+Plug 'fatih/vim-go'
 Plug 'easymotion/vim-easymotion'
 Plug 'shime/vim-livedown'
 Plug 'elzr/vim-json'
-Plug 'nvie/vim-flake8'
-Plug 'joonty/vdebug'
 Plug 'ervandew/supertab'
-Plug 'valloric/youcompleteme'
-Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-surround'
 Plug 'konfekt/fastfold'
 Plug 'tmhedberg/simpylfold'
@@ -20,7 +21,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'xolox/vim-misc'
-Plug 'roman/golden-ratio'
+Plug 'ryanoasis/vim-devicons'
 Plug 'sjl/gundo.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 
@@ -47,7 +48,7 @@ set wrap
 set ignorecase
 set autoindent
 set nu
-"set background=dark
+set background=dark
 set foldmethod=syntax
 set foldnestmax=10
 set nofoldenable
@@ -75,9 +76,11 @@ cnoremap <Esc><C-B>	<S-Left>
 " forward one word
 cnoremap <Esc><C-F>	<S-Right>
 
-" Convenient mappings
+" Mappings based on filetype
+au BufEnter *.json map <C-J> :%!python -m json.tool<CR>
+au BufEnter *.py map <F5> <esc>:w\|!python %<CR>
 
-" " Insert mode
+" Insert mode
 inoremap <C-k> <Up>
 inoremap <C-j> <Down>
 inoremap <C-l> <Right>
@@ -97,7 +100,8 @@ nmap gm :LivedownToggle<CR>
 set t_Co=256
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-"set termguicolors
+
+colorscheme gruvbox
 
 let mapleader=","
 
@@ -106,6 +110,8 @@ let mapleader=","
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
@@ -117,4 +123,14 @@ let g:indent_guides_start_level = 2
 nnoremap <leader>gt :GundoToggle<cr>
 
 " YCm
- let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_add_preview_to_completeopt = 0
+
+set mouse=a
+
+" Workspace
+nnoremap <leader>s :ToggleWorkspace<CR>
+let g:workspace_session_name = 'Session.vim'
+let g:workspace_autosave = 1
+
+" JSX
+let g:jsx_ext_required = 1
