@@ -1,6 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
 
 "Plug 'jiangmiao/auto-pairs'
+Plug 'easymotion/vim-easymotion'
 Plug 'shime/vim-livedown'
 Plug 'elzr/vim-json'
 Plug 'nvie/vim-flake8'
@@ -96,7 +97,7 @@ nmap gm :LivedownToggle<CR>
 set t_Co=256
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set termguicolors
+"set termguicolors
 
 let mapleader=","
 
