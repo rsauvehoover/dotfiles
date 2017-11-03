@@ -1,5 +1,6 @@
 call plug#begin('~/.local/share/nvim/site/autoload')
 
+Plug 'lervag/vimtex'
 Plug 'leafgarland/typescript-vim'
 Plug 'thaerkh/vim-workspace'
 Plug 'plasticboy/vim-markdown'
