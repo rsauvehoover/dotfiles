@@ -1,24 +1,43 @@
 call plug#begin()
-Plug 'ervandew/supertab'
+" syntax and autocomplete
+Plug 'tpope/vim-markdown'
 Plug 'numirias/semshi'
+Plug 'tpope/vim-surround'
 Plug 'shougo/deoplete.nvim'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+
+" Auto compilation
+Plug 'shime/vim-livedown'
 Plug 'lervag/vimtex'
+
+" visual
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ryanoasis/vim-devicons'
+
+" misc functionality
+Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-surround'
-Plug 'ryanoasis/vim-devicons'
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
 call plug#end()
 
+" livedown
+nmap gm :LivedownToggle<CR>
+
+" vim-markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" semshi
 let g:semshi#active = v:true
 
+" set python host to be python3.7 for deoplete (not necessary on newer
+" machines)
 let g:python3_host_prog = '/usr/bin/python3.7'
 
-" Use deoplete.
+" deoplete.
 let g:deoplete#enable_at_startup = 1
 
 let g:deoplete#auto_complete_delay = 100
@@ -39,11 +58,10 @@ let g:UltiSnipsEditSplit="vertical"
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
+" NERDTree
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
@@ -52,11 +70,15 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 vnoremap < <gv
 vnoremap > >gv
 
+" colour scheme
 set background=dark
 colorscheme gruvbox
 
+" set the leader to , to make commenting/uncommenting with NERDCommenter
+" easier
 let mapleader=","
 
+" various useful settings
 set backspace=2
 set diffopt=horizontal
 set nohlsearch
@@ -76,5 +98,6 @@ set nofoldenable
 set foldlevel=2
 syntax on
 
+" convenient insert and normal mode mappings
 imap jk <Esc>
 nmap ; :
