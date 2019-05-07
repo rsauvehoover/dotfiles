@@ -1,4 +1,5 @@
 call plug#begin()
+Plug 'ervandew/supertab'
 Plug 'numirias/semshi'
 Plug 'shougo/deoplete.nvim'
 Plug 'lervag/vimtex'
