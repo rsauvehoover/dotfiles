@@ -1,4 +1,8 @@
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" PLUGIN INSTALLATIONS 
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 call plug#begin()
+
 " syntax and autocomplete
 Plug 'tpope/vim-markdown'
 Plug 'numirias/semshi'
@@ -21,7 +25,14 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+
+" fuzzyfind - this is really cool https://vimawesome.com/plugin/fzf
+Plug 'junegunn/fzf'
+
 call plug#end()
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" END OF PLUGIN INSTALLATIONS 
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 " livedown
 nmap gm :LivedownToggle<CR>
