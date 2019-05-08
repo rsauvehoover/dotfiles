@@ -1,5 +1,5 @@
 #!/bin/sh
 tmux new-session -d 'nvim .'
-tmux split-window -h
+tmux split-window -h -p 30
 tmux split-window -v 'bpython'
 tmux -2 attach-session -d
