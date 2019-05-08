@@ -1,5 +1,29 @@
 #!/bin/sh
+
+# makes a terminal setup that looks like the following
+# 0 nvim
+# 1 regular terminal
+# 2 interpreter (optional)
+# +-------+---+
+# |       | 1 |
+# |   0   +---+
+# |       | 2 |
+# +-------+---+
+
+# create a main nvim pane
 tmux new-session -d 'nvim .'
+
+# split that into a smaller 30% width regular terminal
 tmux split-window -h -p 30
-tmux split-window -v 'bpython'
+
+# check for a specified third pane interpreter to use (none for nothing)
+# otherwise just open python
+if [ -z $1 ]; then
+    tmux split-window -v 'bpython'
+else
+    tmux split-window -v $1
+fi
+# focus the regular terminal pane
+tmux select-pane -t 1
+
 tmux -2 attach-session -d
