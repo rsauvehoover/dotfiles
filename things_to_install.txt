@@ -1,0 +1,10 @@
+Spotify
+Iterm2
+1Password
+Firefox
+adguard
+discord
+slack
+adobe CC
+docker desktop
+
