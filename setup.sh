@@ -53,3 +53,4 @@ cd fonts
 # Clean up
 cd ..
 rm -rf fonts
+
