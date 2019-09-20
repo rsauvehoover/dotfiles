@@ -8,3 +8,4 @@ slack
 adobe CC
 docker desktop
 
+setup cron for rsync things
