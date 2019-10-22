@@ -7,6 +7,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'thaerkh/vim-workspace'
 Plug 'plasticboy/vim-markdown'
 Plug 'fatih/vim-go'
+Plug 'othree/html5.vim'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'easymotion/vim-easymotion'
 Plug 'shime/vim-livedown'
 Plug 'elzr/vim-json'
@@ -21,12 +24,17 @@ Plug 'konfekt/fastfold'
 Plug 'tmhedberg/simpylfold'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'xolox/vim-misc'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sjl/gundo.vim'
 Plug 'nathanaelkane/vim-indent-guides'
+
+Plug 'mattn/emmet-vim'
+ "Plug 'scrooloose/syntastic'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -96,6 +104,8 @@ nmap <C-S><C-C> :set spell spelllang=en_ca<CR>
 nmap <C-C><C-S> :set nospell<CR>
 
 nmap <F8> :TagbarToggle<CR>
+" json formatting
+nmap <C-f><C-f> :execute '%!python -m json.tool'<CR>
 
 map <C-n> :NERDTreeToggle<CR>
 
@@ -125,6 +135,16 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " Indent_guides
 let g:indent_guides_start_level = 2
 
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" Snippet author email etc
+let g:snips_author="R. Frederic Sauve-Hoover"
+let g:snips_email="rsauveho@ualberta.ca"
+let g:snips_github="rsauvehoover"
+
 " Gundo Keybinds
 nnoremap <leader>gt :GundoToggle<cr>
 
@@ -138,5 +158,21 @@ nnoremap <leader>s :ToggleWorkspace<CR>
 let g:workspace_session_name = 'Session.vim'
 let g:workspace_autosave = 1
 
+" simplyfold
+let g:SimpylFold_docstring_preview = 1
+
 " JSX
 let g:jsx_ext_required = 1
+
+" Syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
+" Tagbar toggle
+nmap <C-T> :TagbarToggle<CR>
