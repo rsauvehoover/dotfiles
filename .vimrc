@@ -1,5 +1,7 @@
 call plug#begin('~/.local/share/nvim/site/autoload')
 
+Plug 'majutsushi/tagbar'
+Plug 'ryanoasis/vim-devicons'
 Plug 'lervag/vimtex'
 Plug 'leafgarland/typescript-vim'
 Plug 'thaerkh/vim-workspace'
@@ -36,6 +38,7 @@ vnoremap K :m '<-2<CR>gv=gv
 " Return to visual block when indenting
 vnoremap < <gv
 vnoremap > >gv
+set encoding=UTF-8
 set backspace=2
 set diffopt=horizontal
 set nohlsearch
@@ -91,6 +94,8 @@ imap jk <Esc>
 nmap ; :
 nmap <C-S><C-C> :set spell spelllang=en_ca<CR>
 nmap <C-C><C-S> :set nospell<CR>
+
+nmap <F8> :TagbarToggle<CR>
 
 map <C-n> :NERDTreeToggle<CR>
 
