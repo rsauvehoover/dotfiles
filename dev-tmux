@@ -14,7 +14,7 @@
 tmux new-session -d 'nvim .'
 
 # split that into a smaller 30% width regular terminal
-tmux split-window -h -p 30
+tmux split-window -h -p 10
 
 # check for a specified third pane interpreter to use (none for nothing)
 # otherwise just open python
