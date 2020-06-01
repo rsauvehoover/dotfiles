@@ -17,9 +17,9 @@ tmux new-session -d 'nvim .'
 tmux split-window -h -p 10
 
 # check for a specified third pane interpreter to use (none for nothing)
-# otherwise just open python
+# otherwise just open a regular terminal pane
 if [ -z $1 ]; then
-    tmux split-window -v 'bpython'
+    tmux split-window -v
 else
     tmux split-window -v $1
 fi
