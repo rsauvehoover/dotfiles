@@ -1,137 +1,200 @@
-call plug#begin('~/.local/share/nvim/site/autoload')
+if exists('g:vscode')
+else
+    if has('win32')
+        call plug#begin('~/vimfiles/autoload')
+    else
+        call plug#begin('~/.config/nvim/plugged')
+    endif
 
-Plug 'lervag/vimtex'
-Plug 'leafgarland/typescript-vim'
-Plug 'thaerkh/vim-workspace'
-Plug 'plasticboy/vim-markdown'
-Plug 'fatih/vim-go'
-Plug 'easymotion/vim-easymotion'
-Plug 'shime/vim-livedown'
-Plug 'elzr/vim-json'
-Plug 'ervandew/supertab'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
-Plug 'morhetz/gruvbox'
-Plug 'tpope/vim-surround'
-Plug 'konfekt/fastfold'
-Plug 'tmhedberg/simpylfold'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-unimpaired'
-Plug 'vim-airline/vim-airline'
-Plug 'xolox/vim-misc'
-Plug 'ryanoasis/vim-devicons'
-Plug 'sjl/gundo.vim'
-Plug 'nathanaelkane/vim-indent-guides'
+    Plug 'morhetz/gruvbox'
+    Plug 'vim-scripts/IndentAnything'
+    Plug 'editorconfig/editorconfig-vim'
+    Plug 'vim-scripts/YankRing.vim'
+    Plug 'sjl/gundo.vim'
+    Plug 'othree/html5.vim'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'junkblocker/patchreview-vim'
+    Plug 'ervandew/supertab'
+    Plug 'mhinz/vim-signify'
+    Plug 'int3/vim-extradite'
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'millermedeiros/vim-statline'
+    Plug 'scrooloose/syntastic'
+    Plug 'godlygeek/tabular'
+    Plug 'easymotion/vim-easymotion'
 
-call plug#end()
+    Plug 'ryanoasis/vim-devicons'
+    Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
-" line number map ctrl n twice to toggle numbers
-" nmap <C-N><C-N> :set invnumber<CR>
-" Move visual block
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-" Return to visual block when indenting
-vnoremap < <gv
-vnoremap > >gv
-set backspace=2
-set diffopt=horizontal
-set nohlsearch
-set nocompatible
-set tabstop=8
-set softtabstop=4
-set expandtab
-set shiftwidth=4
-set wrapmargin=0
-set wrap
-set ignorecase
-set autoindent
-set nu
-set background=dark
-set foldmethod=syntax
-set foldnestmax=10
-set nofoldenable
-set foldlevel=2
-syntax on
+    " lsp related stuff
+    Plug 'OmniSharp/omnisharp-vim'
+    Plug 'kosayoda/nvim-lightbulb'
 
-" Allows us to use bash movement in VIM command line
+    " useful tim pope plugins
+    Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-markdown'
+    Plug 'tpope/vim-speeddating'
+    Plug 'tpope/vim-surround'
 
-" start of line
-cnoremap <C-A>		<Home>
-" back one character
-cnoremap <C-B>		<Left>
-" delete character under cursor
-cnoremap <C-D>		<Del>
-" end of line
-cnoremap <C-E>		<End>
-" forward one character
-cnoremap <C-F>		<Right>
-" recall newer command-line
-cnoremap <C-N>		<Down>
-" recall previous (older) command-line
-cnoremap <C-P>		<Up>
-" back one word
-cnoremap <Esc><C-B>	<S-Left>
-" forward one word
-cnoremap <Esc><C-F>	<S-Right>
+    " css
+    Plug 'ap/vim-css-color'
+    Plug 'hail2u/vim-css3-syntax'
 
-" Mappings based on filetype
-au BufEnter *.json map <C-J> :%!python -m json.tool<CR>
-au BufEnter *.py map <F5> <esc>:w\|!python %<CR>
+    " js
+    Plug 'pangloss/vim-javascript'
+    Plug 'elzr/vim-json'
+    Plug 'mxw/vim-jsx'
+    Plug 'millermedeiros/vim-esformatter'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'prettier/vim-prettier'
 
-" Insert mode
-inoremap <C-k> <Up>
-inoremap <C-j> <Down>
-inoremap <C-l> <Right>
-inoremap <C-h> <Left>
-
-imap jk <Esc>
-nmap ; :
-nmap <C-S><C-C> :set spell spelllang=en_ca<CR>
-nmap <C-C><C-S> :set nospell<CR>
-
-map <C-n> :NERDTreeToggle<CR>
-
-nmap gm :LivedownToggle<CR>
-
-" Gruvbox theme
-
-set t_Co=256
-
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-colorscheme gruvbox
+    call plug#end()
+endif
 
 let mapleader=","
 
-" NerdTree
+if exists('g:vscode')
+    " VSCode specific stuff
+else
+    " CHADtree 
+    " open
+    nnoremap <C-n> <cmd>CHADopen<cr>
+    " clear quickfix list
+    nnoremap <leader>l <cmd>call setqflist([])<cr>
 
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+    " nvim-lightbulb activate
+    autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
+    
 
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+    " neovim specific stuff
+    set nobackup
+    set nowritebackup
+    set noswapfile
+    
+    " indentation and wrapping
+    set wrap
+    set textwidth=120
+    set formatoptions=qrn1
+    set formatoptions-=o
+    
+    " remove sounds effects
+    set noerrorbells
+    set visualbell
+    
+    " turn on gruvbox in non-vscode environments
+    set t_Co=256
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    colorscheme gruvbox
+endif
 
-" Indent_guides
-let g:indent_guides_start_level = 2
+" History
+set history=999             " Increase history (default = 20)
+set undolevels=999          " more undos (default=100)
 
-" Gundo Keybinds
-nnoremap <leader>gt :GundoToggle<cr>
+" key configs
+set backspace=2
+set nostartofline
 
-" YCm
-let g:ycm_add_preview_to_completeopt = 0
+set expandtab
+set formatoptions-=o
 
-set mouse=a
+set nomodeline
 
-" Workspace
-nnoremap <leader>s :ToggleWorkspace<CR>
-let g:workspace_session_name = 'Session.vim'
-let g:workspace_autosave = 1
+set pastetoggle=<leader>p
 
-" JSX
-let g:jsx_ext_required = 1
+" -----------------------------------------------------------------------------
+" KEY MAPPINGS
+" -----------------------------------------------------------------------------
+
+" Move visual block
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Return to visual block when indenting
+vnoremap < <gv
+vnoremap > >gv
+
+" Split line (sister to [J]oin lines)
+" The normal use of S is covered by cc, so don't worry about shadowing
+nnoremap S i<cr><esc><right>
+
+
+if exists('g:vscode')
+    " VSCode specific stuff
+else
+    " neovim specific stuff
+    " movement by screen line instead of file line (for text wrap)
+    nnoremap j gj
+    nnoremap <down> gj
+    nnoremap k gk
+    nnoremap <up> gk
+
+    " next tab
+    nnoremap <C-Tab> :tabn<CR>
+
+    " automatic esc, really uncommon to type jj,jk
+    inoremap jj <ESC>
+    inoremap jk <Esc>
+
+    " Faster scrolling
+    nnoremap <C-e> 3<C-e>
+    nnoremap <C-y> 3<C-y>
+
+    " Duplicate lines, similar to Eclipse
+    noremap <C-S-Up> YP
+    noremap <C-S-Down> YP
+    
+    " --- COMMON STUFF / HELPERS ---
+
+    " Toggle show tabs and trailing spaces
+    nnoremap <leader>c :set nolist!<CR>
+    
+    " text wrap: Hard wrap paragraph text (similar to TextMate Ctrl+Q)
+    nnoremap <leader>tw gqip
+    nnoremap <leader>nw :set nowrap<CR>
+
+    " Open file (useful for HTML)
+    noremap <silent> <leader>o :!open %<CR>
+
+    " Reformat code
+    nnoremap <leader>rf gg=G
+
+    " I use retab too much and it's hard to type
+    nnoremap <leader>rt :retab!<CR>
+
+    " Pull word under cursor into LHS of a substitute (find and replace)
+    nnoremap <leader>rr :silent call KeywordsAll()<CR> :%s#\<<C-r>=expand("<cword>")<CR>\>#
+    
+    " Visually select the text that was last edited/pasted
+    nnoremap <leader>v `[v`]
+
+    " fast Ack
+    nnoremap <leader>a :tab split<CR>:Ack<Space>
+    nnoremap <leader>aw :silent call KeywordsAll()<CR> :tab split<CR>:Ack<cword><CR> :silent call KeywordsBasic()<CR>
+
+    " Toggle spelling hints
+    nnoremap <silent> <leader>ts :set spell!<CR>
+
+
+    " Move between splits (windows)
+    noremap <C-h> <C-w>h
+    noremap <C-j> <C-w>j
+    noremap <C-k> <C-w>k
+    noremap <C-l> <C-w>l
+
+    " Move windows around (only works on same row)
+    noremap <C-S-Right> <C-w>r
+    noremap <C-S-Left> <C-w>R
+
+    " Open current buffer in a new split
+    noremap <leader>s :vsplit<cr>
+    noremap <leader>i :split<cr>
+
+    " close window
+    noremap <leader>q :clo<CR>
+    
+    " resize splits (http://vim.wikia.com/wiki/Resize_splits_more_quickly)
+    nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+    nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+endif
